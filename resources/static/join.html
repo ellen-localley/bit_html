@@ -87,10 +87,17 @@ footer {
   
   <article>
 	<form action="">
+	<label>NAME </label><br>
+	<input id="name" type="text"/><br>
 	<label>ID</label><br>
-	<input type="text"><br>
+	<input id="userid" type="text"/><br>
 	<label>PASSWORD </label><br>
-	<input type="text"><br>
+	<input id="passwd" type="text"/><br>
+	<label>SSN</label><br>
+	<input id="ssn" type="text"><br>
+	<label>ADDR</label><br>
+	<input id="addr" type="text"><br>
+
 	<input id="a-login" type="button" value="회원가입">
 	<input id="a-cancel" type="button" value="취소">
 	</form>
@@ -102,14 +109,39 @@ footer {
 </footer>
 <script type="text/javascript">
 	$('#a-first').click(function(){
+		alert('London 클릭')
 	})
 	$('#a-second').click(function(){
+		alert('Paris 클릭')
 	})
 	$('#a-third').click(function(){
+		alert('Tokyo 클릭')
 	})
 	$('#a-login').click(function(){
+		let member = {name: $('#name').val(),
+			userid: $('#userid').val(),
+			passwd: $('#passwd').val(),
+			ssn: $('#ssn').val(),
+			addr: $('#addr').val()}
+		alert('입력된 주민번호: '+member.ssn) 
+		
+		$.ajax({
+			url: '/join',
+			type: 'post',
+			data: JSON.stringify(member),
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function(returnMember){
+				alert(returnMember.name+'님 회원가입 성공')
+			},
+			error: function(){
+				alert('회원가입 실패')
+			}
+			
+		})
 	})
 	$('#a-cancel').click(function(){
+		alert('취소')
 	})
 </script>
 </body>
