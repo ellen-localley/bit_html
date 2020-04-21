@@ -1,5 +1,8 @@
 package com.occamsrazor.web.member;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MemberServiceImpl implements MemberService{
 	private Member[] members;
 	private int count;
@@ -20,23 +23,23 @@ public class MemberServiceImpl implements MemberService{
 		return members;
 	}
 
-	@Override
-	public Member[] searchByName(String name) {
-		Member[] returnMembers = null;
-		int searchCount = count(name);
-		if(searchCount != 0) {
-			returnMembers = new Member[searchCount];
-			int j = 0;
-			for(int i=0; i<count; i++) {
-				returnMembers[j] = members[i];
-				j++;
-				if(searchCount == 0) {
-					break;
-				}
-			}
-		}
-		return returnMembers;
-	}
+//	@Override
+//	public Member[] searchByName(String name) {
+//		Member[] returnMembers = null;
+//		int searchCount = count(name);
+//		if(searchCount != 0) {
+//			returnMembers = new Member[searchCount];
+//			int j = 0;
+//			for(int i=0; i<count; i++) {
+//				returnMembers[j] = members[i];
+//				j++;
+//				if(searchCount == 0) {
+//					break;
+//				}
+//			}
+//		}
+//		return returnMembers;
+//	}
 
 	@Override
 	public Member[] searchByGender(String gender) {
@@ -61,27 +64,27 @@ public class MemberServiceImpl implements MemberService{
 		return count;
 	}
 
-	@Override
-	public int count(String name) {
-		int returnCount = 0;
-		for(int i=0; i<count; i++) {
-			if(name.equals(members[i].getName())) {
-				returnCount++;
-			}
-		}
-		return returnCount;
-	}
-
-	@Override
-	public Member login(Member member) {
-		Member returnMember = null;
-		for(int i=0; i<count; i++) {
-			if(member.getUserid().equals(members[i].getUserid()) && member.getPasswd().equals(members[i].getPasswd())) {
-				returnMember = members[i];
-			}
-		}
-		return returnMember;
-	}
+//	@Override
+//	public int count(String name) {
+//		int returnCount = 0;
+//		for(int i=0; i<count; i++) {
+//			if(name.equals(members[i].getName())) {
+//				returnCount++;
+//			}
+//		}
+//		return returnCount;
+//	}
+//
+//	@Override
+//	public Member login(Member member) {
+//		Member returnMember = null;
+//		for(int i=0; i<count; i++) {
+//			if(member.getUserid().equals(members[i].getUserid()) && member.getPasswd().equals(members[i].getPasswd())) {
+//				returnMember = members[i];
+//			}
+//		}
+//		return returnMember;
+//	}
 
 	@Override
 	public void update(Member member) {
@@ -103,6 +106,24 @@ public class MemberServiceImpl implements MemberService{
 			}
 		}
 		
+	}
+
+	@Override
+	public Member[] searchByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean login(Member member) {
+		boolean ok = false;
+		for(int i=0; i<count; i++) {
+			if(member.getUserid().equals(members[i].getUserid()) && member.getPasswd().equals(members[i].getPasswd())) {
+				ok = true;
+				break;
+			}
+		}
+		return ok;
 	}
 
 }

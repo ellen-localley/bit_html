@@ -7,8 +7,9 @@ public interface MemberService {
 	public Member[] searchByGender(String gender);
 	public Member detail(String userid);
 	public int count();
-	public int count(String name);
-	public Member login(Member member);
+	public boolean login(Member member);
+//	public int count(String name);
+//	public Member login(Member member);
 	public void update(Member member);
 	public void delete(Member member);
 }

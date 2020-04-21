@@ -70,10 +70,9 @@ footer {
 </style>
 </head>
 <body>
-	<h2> 홈페이지 </h2>
 
 <header>
-  <h2>Cities</h2>
+  <h2>회원가입</h2>
 </header>
 
 <section>
@@ -115,24 +114,26 @@ footer {
 		alert('Paris 클릭')
 	})
 	$('#a-third').click(function(){
-		alert('Tokyo 클릭')
+		window.alert('Tokyo 클릭')
 	})
 	$('#a-login').click(function(){
-		let member = {name: $('#name').val(),
-			userid: $('#userid').val(),
-			passwd: $('#passwd').val(),
-			ssn: $('#ssn').val(),
-			addr: $('#addr').val()}
-		alert('입력된 주민번호: '+member.ssn) 
 		
 		$.ajax({
-			url: '/join',
+			url: '/member/join',
 			type: 'post',
-			data: JSON.stringify(member),
+			data: JSON.stringify({name: $('#name').val(),
+				userid: $('#userid').val(),
+				passwd: $('#passwd').val(),
+				ssn: $('#ssn').val(),
+				addr: $('#addr').val()}),
 			dataType: 'json',
 			contentType: 'application/json',
-			success: function(returnMember){
-				alert(returnMember.name+'님 회원가입 성공')
+			success: function(message){
+				if(message === 'SUCCESS'){
+					location.href = "../index.html"
+				}else {
+					location.href = "join.html"
+				}
 			},
 			error: function(){
 				alert('회원가입 실패')
