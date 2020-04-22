@@ -72,34 +72,27 @@ footer {
 <body>
 
 <header>
-  <h2>회원가입</h2>
+  <h2>로또 구매</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="a-second" href="join.html">Join</a></li>
-      <li><a id="a-first" href="#">Login</a></li>
-      <li><a id="a-third" href="#">....</a></li>
+      
     </ul>
   </nav>
   
   <article>
 	<form action="">
-	<label>NAME </label><br>
-	<input id="name" type="text"/><br>
-	<label>ID</label><br>
+	<label>ID </label><br>
 	<input id="userid" type="text"/><br>
-	<label>PASSWORD </label><br>
-	<input id="passwd" type="text"/><br>
-	<label>SSN</label><br>
-	<input id="ssn" type="text"><br>
-	<label>ADDR</label><br>
-	<input id="addr" type="text"><br>
-
-	<input id="a-login" type="button" value="회원가입">
-	<input id="a-cancel" type="button" value="취소">
+	<label>로또 번호 입력(,로 분리해주세요)</label><br>
+	<input id="lotto" type="text"/><br>
+	
+	<input id="buy_button" type="button" value="로또 구매">
+	<input id="result_button" type="button" value="당첨 결과">
 	</form>
+	<div id="result"></div>
   </article>
 </section>
 
@@ -107,43 +100,7 @@ footer {
   <p>Footer</p>
 </footer>
 <script>
-	$('#a-first').click(function(){
-		alert('London 클릭')
-	})
-	$('#a-second').click(function(){
-		alert('Paris 클릭')
-	})
-	$('#a-third').click(function(){
-		window.alert('Tokyo 클릭')
-	})
-	$('#a-login').click(function(){
-		
-		$.ajax({
-			url: '/member/join',
-			type: 'post',
-			data: JSON.stringify({name: $('#name').val(),
-				userid: $('#userid').val(),
-				passwd: $('#passwd').val(),
-				ssn: $('#ssn').val(),
-				addr: $('#addr').val()}),
-			dataType: 'json',
-			contentType: 'application/json',
-			success: d => {
-				if(d === 'SUCCESS'){
-					location.href = "../index.html"
-				}else {
-					location.href = "join.html"
-				}
-			},
-			error: (request,status,error) => {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-			}
-		})
-	})
-	$('#a-cancel').click(e => {
-		e.preventDefault()
-		alert('취소')
-	})
+	
 </script>
 </body>
 </html>

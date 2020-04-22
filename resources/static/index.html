@@ -78,8 +78,8 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="#">Login</a></li>
-      <li><a id="a-second" href="member/join.html">Join</a></li>
+      <li><a id="join_a" >Join</a></li>
+      <li><a id="login_a" >Login</a></li>
       <li><a id="a-third" href="#">....</a></li>
     </ul>
   </nav>
@@ -100,13 +100,23 @@ footer {
   <p>Footer</p>
 </footer>
 <script type="text/javascript">
-	$('#a-first').click(function(){
+	
+	$('#join_a')
+		.css('cursor','pointer')
+		.click(e => {
+			e.preventDefault()
+			location.href = "member/join.html"
 	})
-	$('#a-second').click(function(){
+	
+	$('#login_a')
+		.css('cursor','pointer')
+		.click(e => {
+			e.preventDefault()
+			location.href = "index.html"
 	})
-	$('#a-third').click(function(){
-	})
-	$('#a-login').click(function(){
+	
+	$('#a-login').click(e => {
+		e.preventDefault()
 		
 		$.ajax({
 			url: '/member/login',
@@ -132,7 +142,7 @@ footer {
 		})
 		
 	})
-	$('#a-cancel').click(function(){
+	$('#a-cancel').click(e => {
 		
 		
 	})

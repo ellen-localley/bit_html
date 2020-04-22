@@ -2,6 +2,8 @@ package com.occamsrazor.web.grade;
 
 import org.springframework.stereotype.Service;
 
+import com.occamsrazor.web.util.Credit;
+
 @Service
 public class GradeServiceImpl implements GradeService {
 	private Grade[] grades;
@@ -24,60 +26,43 @@ public class GradeServiceImpl implements GradeService {
 		return grades;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
-	public Grade detail(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+	public Credit detail(String userid) {
+		Credit credit = null;
+		switch(avg(userid)/10) {
+		case 10: case 9: credit = credit.A; break;
+		case 8: credit = credit.B; break;
+		case 7: credit = credit.C; break;
+		case 6: credit = credit.D; break;
+		case 5: credit = credit.E; break;
+		default : credit = credit.F; break;
+		}
+		return credit;
+	}
+
+
+	private int avg(String userid) {
+		return total(userid)/4;
+	}
+
+	private int total(String userid) {
+		int total = 0;
+		for(int i=0; i<count; i++) {
+			if(userid.equals(grades[i].getUserid())) {
+				total = Integer.parseInt(grades[i].getKor())
+						+Integer.parseInt(grades[i].getEng())
+						+Integer.parseInt(grades[i].getMath())
+						+Integer.parseInt(grades[i].getJava());
+			}
+		}
+		System.out.println("total score : "+total);
+		return total;
 	}
 
 	@Override
 	public int count() {
 		return count;
 	}
-
-	@Override
-	public void update(Grade grade) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Grade grade) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int total(Grade grade) {
-		
-		return Integer.parseInt(grade.getKor()+grade.getEng()+grade.getMath()+grade.getJava());
-	}
-
-	@Override
-	public int avg(Grade grade) {
-		
-		return total(grade)/4;
-	}
-
-	@Override
-	public String record(Grade grade) {
-		String result = "";
-		int avg = avg(grade);
-		if (avg >= 90) {
-			result = "A";
-		} else if (avg >= 80) {
-			result = "B";
-		} else if (avg >= 70) {
-			result = "C";
-		} else if (avg >= 60) {
-			result = "D";
-		} else if (avg >= 50) {
-			result = "E";
-		} else {
-			result = "F";
-		}
-		return result;
-	}
-	
 
 }
