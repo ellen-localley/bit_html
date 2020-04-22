@@ -87,7 +87,7 @@ footer {
 	<label>ID </label><br>
 	<input id="userid" type="text"/><br>
 	<label>로또 번호 입력(,로 분리해주세요)</label><br>
-	<input id="lotto" type="text"/><br>
+	<input id="number" type="text"/><br>
 	
 	<input id="buy_button" type="button" value="로또 구매">
 	<input id="result_button" type="button" value="당첨 결과">
@@ -99,8 +99,42 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-<script>
+<script type="text/javascript">
+	$('#buy_button').click(e => {
+		e.preventDefault()
+		$.ajax({
+			url: '/lotto/buy',
+			type: 'post',
+			data: JSON.stringify({
+				userid: $('#userid').val()
+				number: $('#number').val()
+			}),
+			dataType: 'json',
+			contentType: 'application/json',
+			success: d => {
+				alert(d)
+			},
+			error: (req, x, err) => {
+				alert(req.status+'\n'+req.responseText+'\n'+err)
+			}
+		})
+	})
 	
+	$('#result_button').click(e => {
+		e.preventDefault()
+		$.ajax({
+			url: '/lotto/result',
+			type: 'get',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: d => {
+				$('#result').html('<h3>결과: '+d+'</h3>')
+			},
+			error: (req, x, err) => {
+				alert(req.status+'\n'+req.responseText+'\n'+err)
+			}
+		})
+	})
 </script>
 </body>
 </html>
