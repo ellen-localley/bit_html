@@ -72,27 +72,32 @@ footer {
 <body>
 
 <header>
-  <h2>로그인</h2>
+  <h2>사용자 가입</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="join_a" >관리자 등록</a></li>
-      <li><a id="login_a" >관리자 접속</a></li>
-      <li><a id="signup_a" >사용자 가입</a></li>
+      <li><a id="home_a" >홈으로</a></li>
       <li><a id="signin_a" >사용자 로그인</a></li>
     </ul>
   </nav>
   
   <article>
 	<form action="">
+	<label>NAME </label><br>
+	<input id="name" type="text"/><br>
 	<label>ID</label><br>
-	<input id="userid" type="text"><br>
+	<input id="userid" type="text"/><br>
 	<label>PASSWORD </label><br>
-	<input id="passwd" type="text"><br>
-	<input id="a-login" type="button" value="로그인">
-	<input id="a-cancel" type="button" value="취소">
+	<input id="passwd" type="text"/><br>
+	<label>SSN</label><br>
+	<input id="ssn" type="text"><br>
+	<label>ADDR</label><br>
+	<input id="addr" type="text"><br>
+
+	<input id="signup_button" type="button" value="사용자 가입">
+	<input id="cancel_button" type="button" value="가입 취소">
 	</form>
   </article>
 </section>
@@ -100,67 +105,49 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-<script type="text/javascript">
-	
-	$('#join_a')
-		.css('cursor','pointer')
-		.click(e => {
-			e.preventDefault()
-			location.href = "member/join.html"
-	})
-	
-	$('#login_a')
-		.css('cursor','pointer')
-		.click(e => {
-			e.preventDefault()
-			location.href = "index.html"
-	})
-	
-	$('#signup_a')
-		.css('cursor','pointer')
-		.click(e =>{
-			e.preventDefault()
-			location.href = "user/signup.html"
-		})
-		
-	$('#signin_a')
-		.css('cursor','pointer')
-		.click(e => {
-			e.preventDefault()
-			location.href = "user/signin.html"
-		})
-	
-	$('#a-login').click(e => {
+<script>
+$('#home_a')
+	.css('cursor','pointer')
+	.click(e =>{
 		e.preventDefault()
-		
+		location.href = "../index.html"
+})
+
+$('#signin_a')
+	.css('cursor','pointer')
+	.click(e => {
+		e.preventDefault()
+		location.href = "/user/signin.html"
+	})
+	
+$('#signup_button')
+	.click(e => {
+		e.preventDefault()
 		$.ajax({
-			url: '/member/login',
+			url: '/user/join',
 			type: 'post',
-			data: JSON.stringify(
-					{userid: $('#userid').val(),
-					 passwd: $('#passwd').val()}),
+			data: JSON.stringify({name: $('#name').val(),
+				userid: $('#userid').val(),
+				passwd: $('#passwd').val(),
+				ssn: $('#ssn').val(),
+				addr: $('#addr').val()}),
 			dataType: 'json',
 			contentType: 'application/json',
-			
-			
-			success : function(message){
-				if(message === 'SUCCESS'){
-					location.href = "grade/register.html"
-				}else {
-					alert('다시 로그인 해주세요')
-					location.href = "index.html"
+			success: d => {
+				if(d === 'SUCCESS'){
+					location.href = 'signin.html'
+				}else{
+					location.href = 'signup.html'
 				}
 			},
-			error : function(){
-				alert('Networking Error')
+			error: (req, x, err) => {
+				alert(req.status)
 			}
 		})
-		
-	})
-	$('#a-cancel').click(e => {
-		
-		
-	})
+})
+	
+	
+
 	
 </script>
 </body>

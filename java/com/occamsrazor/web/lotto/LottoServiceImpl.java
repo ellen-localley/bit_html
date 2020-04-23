@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.occamsrazor.web.util.Messenger;
 
+
 public class LottoServiceImpl implements LottoService{
 	private Lotto[] lottos;
 	private int count;
@@ -26,10 +27,12 @@ public class LottoServiceImpl implements LottoService{
 	}
 
 	@Override
-	public Messenger record(Lotto lotto) {
+	public Messenger record(String number) {
 		Random random = new Random();
-		int a = random.nextInt(46)+1;
-		System.out.println(a);
+		int randomNumber = random.nextInt(46)+1;
+		
+		String[] data = number.split(",");
+		int expectNumber = Integer.parseInt(data[0]);
 		return null;
 	}
 

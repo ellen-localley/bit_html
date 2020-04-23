@@ -5,5 +5,5 @@ import com.occamsrazor.web.util.Messenger;
 public interface LottoService {
 	public void add(Lotto lotto);
 	public int count();
-	public Messenger record(Lotto lotto);
+	public Messenger record(String number);
 }
