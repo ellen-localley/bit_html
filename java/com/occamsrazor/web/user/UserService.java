@@ -9,5 +9,9 @@ public interface UserService {
 	public User login(User user);
 	
 	public User detail(String userid);
+
+	public boolean update(User user);
+
+	public boolean remove(String userid);
 	
 }

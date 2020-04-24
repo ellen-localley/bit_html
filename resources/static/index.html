@@ -91,8 +91,8 @@ footer {
 	<input id="userid" type="text"><br>
 	<label>PASSWORD </label><br>
 	<input id="passwd" type="text"><br>
-	<input id="a-login" type="button" value="로그인">
-	<input id="a-cancel" type="button" value="취소">
+	<input id="login_button" type="button" value="로그인">
+	<input id="cancel_button" type="button" value="취소">
 	</form>
   </article>
 </section>
@@ -130,7 +130,7 @@ footer {
 			location.href = "user/signin.html"
 		})
 	
-	$('#a-login').click(e => {
+	$('#login_button').click(e => {
 		e.preventDefault()
 		
 		$.ajax({
@@ -141,8 +141,6 @@ footer {
 					 passwd: $('#passwd').val()}),
 			dataType: 'json',
 			contentType: 'application/json',
-			
-			
 			success : function(message){
 				if(message === 'SUCCESS'){
 					location.href = "grade/register.html"
@@ -157,7 +155,7 @@ footer {
 		})
 		
 	})
-	$('#a-cancel').click(e => {
+	$('#cancel_button').click(e => {
 		
 		
 	})

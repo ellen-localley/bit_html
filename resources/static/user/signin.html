@@ -88,8 +88,8 @@ footer {
 	<input id="userid" type="text"><br>
 	<label>PASSWORD </label><br>
 	<input id="passwd" type="text"><br>
-	<input id="a-login" type="button" value="로그인">
-	<input id="a-cancel" type="button" value="취소">
+	<input id="login_button" type="button" value="로그인">
+	<input id="cancel_button" type="button" value="취소">
 	</form>
   </article>
 </section>
@@ -98,29 +98,30 @@ footer {
   <p>Footer</p>
 </footer>
 <script type="text/javascript">
-$('#a-login').click(e => {
+$('#login_button').click(e => {
 	e.preventDefault()
 	
 		$.ajax({
-		url: '/user/login',
-		type: 'post',
-		data: JSON.stringify({
-			userid: $('#userid').val(),
-			passwd: $('#passwd').val()
-		}),
-		dataType: 'json',
-		contentType: 'application/json',
-		success: d => {
-			if(d.messenger === 'SUCCESS'){
-				location.href = 'mypage.html'
-			}else{
-				location.href = 'signin.html'
+			url: '/user/login',
+			type: 'post',
+			data: JSON.stringify({
+				userid: $('#userid').val(),
+				passwd: $('#passwd').val()
+			}),
+			dataType: 'json',
+			contentType: 'application/json',
+			success: d => {
+				if(d.messenger === 'SUCCESS'){
+					sessionStorage.setItem('userid', d.user.userid)
+					location.href = 'mypage.html'
+				}else{
+					location.href = 'signin.html'
+				}
+			},
+			error: (r, x, e) => {
+				alert(r.status)
 			}
-		},
-		error: (r, x, e) => {
-			alert(r.status)
-		}
-	})
+		})
 })
 
 </script>
