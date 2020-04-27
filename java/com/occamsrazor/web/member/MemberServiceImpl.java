@@ -23,24 +23,6 @@ public class MemberServiceImpl implements MemberService{
 		return members;
 	}
 
-//	@Override
-//	public Member[] searchByName(String name) {
-//		Member[] returnMembers = null;
-//		int searchCount = count(name);
-//		if(searchCount != 0) {
-//			returnMembers = new Member[searchCount];
-//			int j = 0;
-//			for(int i=0; i<count; i++) {
-//				returnMembers[j] = members[i];
-//				j++;
-//				if(searchCount == 0) {
-//					break;
-//				}
-//			}
-//		}
-//		return returnMembers;
-//	}
-
 	@Override
 	public Member[] searchByGender(String gender) {
 		// TODO Auto-generated method stub
