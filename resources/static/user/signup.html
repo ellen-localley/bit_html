@@ -88,7 +88,7 @@ footer {
 	<label>NAME </label><br>
 	<input id="name" type="text"/><br>
 	<label>ID</label><br>
-	<input id="userid" type="text"/><br>
+	<input id="userid" type="text"/><input id="dupl_button" type="button" value="중복확인"/><br>
 	<label>PASSWORD </label><br>
 	<input id="passwd" type="text"/><br>
 	<label>SSN</label><br>
@@ -144,6 +144,14 @@ $('#signup_button')
 				alert(req.status)
 			}
 		})
+})
+
+$('#dupl_button').click(e => {
+	e.preventDefault()
+	$.getJSON('/user/duplicate/'+$('#userid').val(), d =>{
+		alert((d === 'SUCCESS')? '사용 가능한 아이디 입니다.':'아이디가 존재합니다.')
+	})
+	
 })
 	
 	

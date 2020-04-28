@@ -55,14 +55,18 @@ public class UserController {
 	
 	@PutMapping("/update")
 	public Messenger update(@RequestBody User user) {
-		System.out.println("update 정보 :::"+user);
 		return (userService.update(user))? Messenger.SUCCESS : Messenger.FAIL;
 	}
 	
 	@DeleteMapping("/remove/{userid}")
 	public Messenger remove(@PathVariable String userid) {
-		System.out.println("delete 정보 :::"+userid);
 		return (userService.remove(userid))? Messenger.SUCCESS : Messenger.FAIL;
+	}
+	
+	@GetMapping("/duplicate/{userid}")
+	public Messenger duplicate(@PathVariable String userid) {
+		System.out.println("중복검사>>>"+userid);
+		return (userService.duplicate(userid))? Messenger.SUCCESS : Messenger.FAIL;
 	}
 
 }

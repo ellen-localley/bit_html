@@ -22,4 +22,7 @@ public interface UserService {
 	
 	public List<User> readFile();
 	
+	public boolean duplicate(String userid);
+	
+	
 }
